@@ -1,0 +1,893 @@
+html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>BREW & BEAN | Coffee & Café</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    :root {
+      --dark: #1d120c;
+      --brown: #704327;
+      --gold: #c58b5b;
+      --cream: #f8efe3;
+      --white: #fffaf5;
+      --text: #2b211b;
+      --muted: #75685e;
+      --border: #e6d7c7;
+    }
+
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      background: var(--white);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1150px;
+      margin: auto;
+    }
+
+    /* NAV */
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(29, 18, 12, 0.96);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      color: white;
+      font-weight: bold;
+      letter-spacing: 2px;
+      font-size: 1.25rem;
+    }
+
+    .logo span {
+      color: var(--gold);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      color: #eaded3;
+      font-family: Arial, sans-serif;
+      font-size: 0.9rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold);
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
+      color: white;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(29, 18, 12, 0.96),
+          rgba(29, 18, 12, 0.65),
+          rgba(29, 18, 12, 0.25)
+        ),
+        url("https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=1800&q=85")
+        center/cover no-repeat;
+    }
+
+    .hero-content {
+      max-width: 720px;
+    }
+
+    .eyebrow {
+      color: #e3b27f;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-family: Arial, sans-serif;
+      font-size: 0.8rem;
+      font-weight: bold;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(3.2rem, 8vw, 6.5rem);
+      line-height: 0.95;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 span {
+      color: #dca36c;
+    }
+
+    .hero p {
+      color: #eaded4;
+      font-family: Arial, sans-serif;
+      max-width: 620px;
+      font-size: 1.05rem;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 13px 21px;
+      border-radius: 7px;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      transition: 0.25s;
+    }
+
+    .primary {
+      background: var(--gold);
+      color: white;
+    }
+
+    .primary:hover {
+      transform: translateY(-2px);
+      background: #d49a66;
+    }
+
+    .outline {
+      border: 1px solid #dca36c;
+      color: white;
+    }
+
+    .outline:hover {
+      background: rgba(255,255,255,0.08);
+    }
+
+    /* GENERAL */
+
+    section {
+      padding: 90px 0;
+    }
+
+    .heading {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .heading .eyebrow {
+      color: var(--brown);
+      margin-bottom: 8px;
+    }
+
+    .heading h2 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+    }
+
+    .heading p {
+      max-width: 600px;
+      margin: 12px auto 0;
+      color: var(--muted);
+      font-family: Arial, sans-serif;
+    }
+
+    /* ABOUT */
+
+    .about {
+      background: var(--cream);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .about-text h2 {
+      font-size: 2.4rem;
+      margin-bottom: 18px;
+    }
+
+    .about-text p {
+      color: var(--muted);
+      font-family: Arial, sans-serif;
+      margin-bottom: 15px;
+    }
+
+    .about-image {
+      height: 420px;
+      border-radius: 20px;
+      background:
+        url("https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1000&q=85")
+        center/cover no-repeat;
+      box-shadow: 0 20px 50px rgba(60,35,15,0.15);
+    }
+
+    /* MENU */
+
+    .menu {
+      background: var(--white);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .menu-card {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      padding: 18px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      transition: 0.2s;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(60,35,15,0.08);
+    }
+
+    .menu-image {
+      width: 90px;
+      height: 90px;
+      flex-shrink: 0;
+      border-radius: 12px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .coffee {
+      background-image:
+        url("https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=400&q=80");
+    }
+
+    .cake {
+      background-image:
+        url("https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=400&q=80");
+    }
+
+    .sandwich {
+      background-image:
+        url("https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=400&q=80");
+    }
+
+    .chai {
+      background-image:
+        url("https://images.unsplash.com/photo-1571934811356-5cc061b6821f?auto=format&fit=crop&w=400&q=80");
+    }
+
+    .menu-info {
+      flex: 1;
+    }
+
+    .menu-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 5px;
+    }
+
+    .menu-top h3 {
+      font-size: 1.15rem;
+    }
+
+    .price {
+      color: var(--brown);
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .menu-info p {
+      color: var(--muted);
+      font-family: Arial, sans-serif;
+      font-size: 0.85rem;
+    }
+
+    /* FEATURES */
+
+    .features {
+      background: var(--dark);
+      color: white;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .feature {
+      text-align: center;
+      padding: 30px;
+    }
+
+    .feature-icon {
+      font-size: 2.3rem;
+      margin-bottom: 15px;
+    }
+
+    .feature h3 {
+      color: #f0d3b7;
+      margin-bottom: 8px;
+    }
+
+    .feature p {
+      color: #b9aaa0;
+      font-family: Arial, sans-serif;
+      font-size: 0.9rem;
+    }
+
+    /* HOURS */
+
+    .hours {
+      background: var(--cream);
+    }
+
+    .hours-box {
+      max-width: 750px;
+      margin: auto;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 30px;
+    }
+
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--border);
+      font-family: Arial, sans-serif;
+    }
+
+    .hours-row:last-child {
+      border-bottom: none;
+    }
+
+    .hours-row span:last-child {
+      color: var(--brown);
+      font-weight: bold;
+    }
+
+    /* CTA */
+
+    .cta {
+      text-align: center;
+      color: white;
+      padding: 90px 20px;
+
+      background:
+        linear-gradient(
+          rgba(45, 26, 17, 0.9),
+          rgba(45, 26, 17, 0.9)
+        ),
+        url("https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=1800&q=85")
+        center/cover;
+    }
+
+    .cta h2 {
+      font-size: clamp(2.3rem, 5vw, 3.7rem);
+      margin-bottom: 12px;
+    }
+
+    .cta p {
+      max-width: 600px;
+      margin: auto auto 25px;
+      color: #ddc9b7;
+      font-family: Arial, sans-serif;
+    }
+
+    /* FOOTER */
+
+    footer {
+      background: #120a06;
+      color: #a99a8e;
+      text-align: center;
+      padding: 35px 0;
+      font-family: Arial, sans-serif;
+      font-size: 0.85rem;
+    }
+
+    .vn {
+      color: #dca36c;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 800px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .menu-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        min-height: 82vh;
+      }
+
+      .hero h1 {
+        font-size: 3.3rem;
+      }
+
+      .menu-card {
+        align-items: flex-start;
+      }
+
+      .menu-image {
+        width: 75px;
+        height: 75px;
+      }
+
+      section {
+        padding: 65px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+
+  <nav>
+    <div class="container nav">
+
+      <a href="#" class="logo">
+        BREW <span>&</span> BEAN
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#hours">Hours</a></li>
+        <li><a href="#visit">Visit</a></li>
+      </ul>
+
+    </div>
+  </nav>
+
+
+  <!-- HERO -->
+
+  <header class="hero">
+
+    <div class="container hero-content">
+
+      <div class="eyebrow">
+        Fresh Coffee • Good Food • Good Mood
+      </div>
+
+      <h1>
+        Your daily cup of
+        <span>happiness.</span>
+      </h1>
+
+      <p>
+        Welcome to Brew & Bean — a cozy neighborhood café
+        serving freshly brewed coffee, delicious food and
+        good vibes every day.
+      </p>
+
+      <div class="buttons">
+
+        <a href="#menu" class="button primary">
+          Explore Our Menu
+        </a>
+
+        <a href="#visit" class="button outline">
+          Visit Us
+        </a>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- ABOUT -->
+
+  <section id="about" class="about">
+
+    <div class="container">
+
+      <div class="about-grid">
+
+        <div class="about-text">
+
+          <div class="eyebrow">
+            Our Story
+          </div>
+
+          <h2>
+            More than just coffee.
+          </h2>
+
+          <p>
+            Brew & Bean started with a simple idea:
+            great coffee tastes even better when shared
+            with good company.
+          </p>
+
+          <p>
+            From your morning espresso to an afternoon
+            catch-up with friends, we're here to make
+            every visit special.
+          </p>
+
+        </div>
+
+        <div class="about-image"></div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- MENU -->
+
+  <section id="menu" class="menu">
+
+    <div class="container">
+
+      <div class="heading">
+
+        <div class="eyebrow">
+          Our Menu
+        </div>
+
+        <h2>
+          Customer favorites.
+        </h2>
+
+        <p>
+          A few of our most-loved drinks and dishes.
+        </p>
+
+      </div>
+
+
+      <div class="menu-grid">
+
+
+        <div class="menu-card">
+
+          <div class="menu-image coffee"></div>
+
+          <div class="menu-info">
+
+            <div class="menu-top">
+              <h3>Cappuccino</h3>
+              <span class="price">₹160</span>
+            </div>
+
+            <p>
+              Rich espresso with steamed milk and silky foam.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="menu-card">
+
+          <div class="menu-image coffee"></div>
+
+          <div class="menu-info">
+
+            <div class="menu-top">
+              <h3>Cold Coffee</h3>
+              <span class="price">₹180</span>
+            </div>
+
+            <p>
+              Smooth chilled coffee with creamy milk.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="menu-card">
+
+          <div class="menu-image cake"></div>
+
+          <div class="menu-info">
+
+            <div class="menu-top">
+              <h3>Chocolate Cake</h3>
+              <span class="price">₹170</span>
+            </div>
+
+            <p>
+              Soft chocolate cake with rich chocolate cream.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="menu-card">
+
+          <div class="menu-image sandwich"></div>
+
+          <div class="menu-info">
+
+            <div class="menu-top">
+              <h3>Veggie Sandwich</h3>
+              <span class="price">₹190</span>
+            </div>
+
+            <p>
+              Fresh vegetables, cheese and house sauce.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="menu-card">
+
+          <div class="menu-image chai"></div>
+
+          <div class="menu-info">
+
+            <div class="menu-top">
+              <h3>Masala Chai</h3>
+              <span class="price">₹90</span>
+            </div>
+
+            <p>
+              Classic Indian tea with aromatic spices.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="menu-card">
+
+          <div class="menu-image cake"></div>
+
+          <div class="menu-info">
+
+            <div class="menu-top">
+              <h3>Brownie</h3>
+              <span class="price">₹140</span>
+            </div>
+
+            <p>
+              Warm, rich and delicious chocolate brownie.
+            </p>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- FEATURES -->
+
+  <section class="features">
+
+    <div class="container">
+
+      <div class="feature-grid">
+
+        <div class="feature">
+
+          <div class="feature-icon">☕</div>
+
+          <h3>Freshly Brewed</h3>
+
+          <p>
+            Quality coffee prepared fresh for every customer.
+          </p>
+
+        </div>
+
+
+        <div class="feature">
+
+          <div class="feature-icon">🥐</div>
+
+          <h3>Fresh Food</h3>
+
+          <p>
+            Delicious snacks and food made with care.
+          </p>
+
+        </div>
+
+
+        <div class="feature">
+
+          <div class="feature-icon">♡</div>
+
+          <h3>Cozy Atmosphere</h3>
+
+          <p>
+            A comfortable place to relax, work and connect.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- HOURS -->
+
+  <section id="hours" class="hours">
+
+    <div class="container">
+
+      <div class="heading">
+
+        <div class="eyebrow">
+          Opening Hours
+        </div>
+
+        <h2>
+          Come say hello.
+        </h2>
+
+      </div>
+
+
+      <div class="hours-box">
+
+        <div class="hours-row">
+          <span>Monday – Friday</span>
+          <span>8:00 AM – 9:00 PM</span>
+        </div>
+
+        <div class="hours-row">
+          <span>Saturday</span>
+          <span>8:00 AM – 10:00 PM</span>
+        </div>
+
+        <div class="hours-row">
+          <span>Sunday</span>
+          <span>9:00 AM – 9:00 PM</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- VISIT / WHATSAPP -->
+
+  <section id="visit" class="cta">
+
+    <div class="container">
+
+      <h2>
+        Your next coffee is waiting.
+      </h2>
+
+      <p>
+        Visit Brew & Bean for great coffee, good food
+        and a relaxed atmosphere.
+      </p>
+
+      <!--
+        DEMO WHATSAPP BUTTON
+
+        Replace 919999999999 with a
+        parent/guardian-approved business number.
+
+        Format:
+        Country code + number
+        WITHOUT +, spaces or brackets.
+      -->
+
+      <a
+        class="button primary"
+        href="https://wa.me/919999999999?text=Hello%20Brew%20%26%20Bean%2C%20I%20would%20like%20to%20know%20more."
+        target="_blank"
+        rel="noopener"
+      >
+        WhatsApp Us
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <p>
+      Brew & Bean — Café Demo Website
+    </p>
+
+    <p>
+      Website concept by
+      <span class="vn">VN CREATIONS</span>
+    </p>
+
+    <p>
+      © <span id="year"></span> Brew & Bean
+    </p>
+
+  </footer>
+
+
+  <script>
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+  </script>
+
+</body>
+</html>
+

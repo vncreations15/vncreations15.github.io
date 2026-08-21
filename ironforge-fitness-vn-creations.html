@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="IRONFORGE FITNESS — modern gym website demo by VN CREATIONS.">
+<title>IRONFORGE FITNESS | Train Strong</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  --black:#080808;--dark:#111;--card:#171717;--red:#e11d2e;
+  --red2:#ff3344;--white:#fff;--muted:#aaa;--line:#292929;
+}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--black);color:var(--white);line-height:1.6}
+a{text-decoration:none;color:inherit}
+button,input,textarea,select{font:inherit}
+.container{width:90%;max-width:1120px;margin:auto}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:1000;background:rgba(8,8,8,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{height:72px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-weight:900;font-size:1.15rem;letter-spacing:1px}.logo span{color:var(--red)}
+.links{display:flex;gap:25px;list-style:none}.links a{color:#bbb}.links a:hover{color:#fff}
+
+/* HERO */
+.hero{
+  min-height:88vh;display:flex;align-items:center;
+  background:
+    linear-gradient(90deg,rgba(0,0,0,.95),rgba(0,0,0,.62),rgba(0,0,0,.35)),
+    radial-gradient(circle at 78% 45%,rgba(225,29,46,.3),transparent 32%),
+    linear-gradient(135deg,#090909 0%,#251013 55%,#080808 100%);
+  position:relative;overflow:hidden;
+}
+.hero:after{content:"FIT";position:absolute;right:-30px;bottom:-75px;font-size:22vw;font-weight:900;color:rgba(255,255,255,.025);font-style:italic}
+.hero-content{max-width:760px;position:relative;z-index:1}
+.kicker{color:#ff6672;font-weight:800;letter-spacing:4px;font-size:13px;margin-bottom:18px}
+.hero h1{font-size:clamp(3.5rem,9vw,7rem);line-height:.88;letter-spacing:-4px;text-transform:uppercase;margin-bottom:25px}
+.hero h1 span{color:var(--red)}
+.hero p{max-width:620px;color:#c2c2c2;font-size:1.05rem;margin-bottom:30px}
+.buttons{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:13px 21px;border-radius:7px;font-weight:800;border:0;cursor:pointer;transition:.2s}
+.primary{background:var(--red);color:#fff}.primary:hover{background:var(--red2);transform:translateY(-2px)}
+.outline{border:1px solid #555;color:#fff;background:transparent}.outline:hover{border-color:var(--red)}
+
+/* COMMON */
+section{padding:90px 0}
+.kicker2{color:var(--red);font-size:12px;font-weight:900;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px}
+.title{font-size:clamp(2.2rem,5vw,4rem);line-height:1;margin-bottom:14px;text-transform:uppercase}
+.desc{color:var(--muted);max-width:650px;margin-bottom:40px}
+
+/* STATS */
+.stats{background:var(--red);padding:28px 0}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;text-align:center}
+.stat strong{display:block;font-size:2rem}.stat span{font-size:12px;text-transform:uppercase;letter-spacing:1px}
+
+/* ABOUT */
+.about{background:#0d0d0d}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:stretch}
+.about-card{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:32px}
+.about-card p{color:var(--muted);margin-bottom:15px}
+.quote{border-left:3px solid var(--red);padding-left:18px;color:#eee;font-weight:bold;font-size:1.2rem;margin-top:25px}
+
+/* PROGRAMS */
+.programs{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+.program{padding:28px;background:var(--card);border:1px solid var(--line);border-radius:15px;transition:.2s}
+.program:hover{transform:translateY(-5px);border-color:#555}
+.number{color:var(--red);font-weight:900;font-size:13px;margin-bottom:35px}
+.program h3{font-size:1.35rem;text-transform:uppercase;margin-bottom:8px}
+.program p{color:var(--muted);font-size:.9rem}
+
+/* MEMBERSHIPS */
+.memberships{background:#0d0d0d}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.plan{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:30px;position:relative}
+.plan.featured{border-color:var(--red);box-shadow:0 0 30px rgba(225,29,46,.12)}
+.badge{position:absolute;right:18px;top:18px;background:var(--red);padding:5px 9px;border-radius:20px;font-size:10px;font-weight:900}
+.plan h3{text-transform:uppercase;font-size:20px}
+.price{font-size:35px;font-weight:900;margin:12px 0}
+.price small{font-size:13px;color:#999;font-weight:normal}
+.plan p{color:var(--muted);font-size:14px;margin-bottom:18px}
+.plan ul{list-style:none;color:#ddd;font-size:14px;margin-bottom:24px}
+.plan li{margin:9px 0}.plan li:before{content:"✓";color:#ff5360;font-weight:bold;margin-right:8px}
+
+/* FACILITY */
+.facility-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.facility{min-height:260px;padding:28px;border-radius:16px;border:1px solid var(--line);background:linear-gradient(135deg,#191919,#0d0d0d)}
+.facility:first-child{background:linear-gradient(135deg,#3a1116,#151515)}
+.facility h3{font-size:24px;text-transform:uppercase;margin-top:120px}
+.facility p{color:#aaa;font-size:14px}
+
+/* CTA */
+.cta{text-align:center;background:linear-gradient(135deg,#310d12,#130b0c)}
+.cta h2{font-size:clamp(2.5rem,6vw,4.5rem);text-transform:uppercase;line-height:.95;margin-bottom:15px}
+.cta p{color:#bbb;max-width:600px;margin:0 auto 25px}
+
+/* FOOTER */
+footer{background:#050505;border-top:1px solid var(--line);padding:35px 0;text-align:center;color:#888;font-size:13px}
+.vn{color:#ff5966}
+
+/* TOAST */
+.toast{position:fixed;left:50%;bottom:25px;transform:translate(-50%,120px);background:#181818;border:1px solid #333;color:#fff;padding:14px 18px;border-radius:9px;transition:.3s;z-index:2000;font-size:14px}
+.toast.show{transform:translate(-50%,0)}
+
+@media(max-width:800px){
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .about-grid,.facility-grid{grid-template-columns:1fr}
+  .programs,.plans{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .links{display:none}
+  .hero{min-height:82vh}
+  .hero h1{letter-spacing:-2px}
+  section{padding:65px 0}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div class="container nav">
+    <a href="#" class="logo">IRON<span>FORGE</span> FITNESS</a>
+    <ul class="links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#programs">Programs</a></li>
+      <li><a href="#plans">Membership</a></li>
+      <li><a href="#visit">Visit</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container hero-content">
+    <div class="kicker">STRENGTH • FITNESS • COMMUNITY</div>
+    <h1>Train <span>hard.</span><br>Stay strong.</h1>
+    <p>
+      A modern gym website concept built for a local fitness business.
+      Strong branding, clear information and a mobile-friendly experience.
+    </p>
+    <div class="buttons">
+      <a href="#plans" class="btn primary">View Memberships</a>
+      <a href="#visit" class="btn outline">Visit The Gym</a>
+    </div>
+  </div>
+</header>
+
+<section class="stats">
+  <div class="container stats-grid">
+    <div class="stat"><strong>24/7</strong><span>Access</span></div>
+    <div class="stat"><strong>40+</strong><span>Equipment Stations</span></div>
+    <div class="stat"><strong>8</strong><span>Training Zones</span></div>
+    <div class="stat"><strong>1</strong><span>Strong Community</span></div>
+  </div>
+</section>
+
+<section id="about" class="about">
+  <div class="container">
+    <div class="kicker2">Why Ironforge</div>
+    <h2 class="title">Built for consistency.</h2>
+    <p class="desc">A focused environment designed to help members build a sustainable training routine.</p>
+
+    <div class="about-grid">
+      <div class="about-card">
+        <p>
+          Ironforge Fitness is a fictional gym brand created as a portfolio
+          demo by VN CREATIONS. The design can be customized for a real
+          gym with its own logo, colors, programs and contact details.
+        </p>
+        <p>
+          The goal is simple: make important information easy to find
+          while giving the business a strong online identity.
+        </p>
+        <div class="quote">"Show up. Put in the work. Keep going."</div>
+      </div>
+
+      <div class="about-card">
+        <h3>What the site includes</h3>
+        <br>
+        <p>✓ Strong hero section</p>
+        <p>✓ Programs and services</p>
+        <p>✓ Membership pricing</p>
+        <p>✓ Facility information</p>
+        <p>✓ Mobile-friendly layout</p>
+        <p>✓ Clear call-to-action buttons</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="programs">
+  <div class="container">
+    <div class="kicker2">Training</div>
+    <h2 class="title">Choose your focus.</h2>
+    <p class="desc">Example program cards that can be replaced with a real gym's services.</p>
+
+    <div class="programs">
+      <div class="program">
+        <div class="number">01</div>
+        <h3>Strength</h3>
+        <p>Structured resistance training designed around progressive improvement.</p>
+      </div>
+      <div class="program">
+        <div class="number">02</div>
+        <h3>Conditioning</h3>
+        <p>Cardio and conditioning sessions for general fitness and endurance.</p>
+      </div>
+      <div class="program">
+        <div class="number">03</div>
+        <h3>Group Training</h3>
+        <p>Energetic sessions that add variety and a community atmosphere.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="plans" class="memberships">
+  <div class="container">
+    <div class="kicker2">Membership</div>
+    <h2 class="title">Simple plans.</h2>
+    <p class="desc">Demo pricing only — replace these with the real client's prices.</p>
+
+    <div class="plans">
+      <div class="plan">
+        <h3>Basic</h3>
+        <div class="price">₹999 <small>/ month</small></div>
+        <p>For members who want simple gym access.</p>
+        <ul>
+          <li>Gym floor access</li>
+          <li>Standard equipment</li>
+          <li>Locker access</li>
+        </ul>
+        <button class="btn outline" onclick="demo()">Choose Basic</button>
+      </div>
+
+      <div class="plan featured">
+        <span class="badge">POPULAR</span>
+        <h3>Pro</h3>
+        <div class="price">₹1,499 <small>/ month</small></div>
+        <p>Extra support and access for regular members.</p>
+        <ul>
+          <li>Everything in Basic</li>
+          <li>Group training</li>
+          <li>Fitness assessment</li>
+        </ul>
+        <button class="btn primary" onclick="demo()">Choose Pro</button>
+      </div>
+
+      <div class="plan">
+        <h3>Elite</h3>
+        <div class="price">₹2,499 <small>/ month</small></div>
+        <p>A premium demo package for customized service.</p>
+        <ul>
+          <li>Everything in Pro</li>
+          <li>Priority support</li>
+          <li>Custom training plan</li>
+        </ul>
+        <button class="btn outline" onclick="demo()">Choose Elite</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="kicker2">The Facility</div>
+    <h2 class="title">Built to train.</h2>
+    <p class="desc">Example facility sections for a real client's gym website.</p>
+
+    <div class="facility-grid">
+      <div class="facility">
+        <h3>Strength Zone</h3>
+        <p>Free weights, racks and resistance equipment.</p>
+      </div>
+      <div class="facility">
+        <h3>Cardio Zone</h3>
+        <p>Treadmills, bikes and conditioning equipment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="visit" class="cta">
+  <div class="container">
+    <h2>Ready to get started?</h2>
+    <p>This is a portfolio demo. Replace the address and contact details with the real client's approved business information.</p>
+    <button class="btn primary" onclick="demo()">Book a Visit</button>
+  </div>
+</section>
+
+<footer>
+  <p>Ironforge Fitness — Website Demo</p>
+  <p>Designed by <span class="vn">VN CREATIONS</span></p>
+  <p>© <span id="year"></span> Ironforge Fitness</p>
+</footer>
+
+<div id="toast" class="toast"></div>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+
+function demo(){
+  const toast=document.getElementById("toast");
+  toast.textContent="Demo button — add the client's approved contact details here.";
+  toast.classList.add("show");
+  setTimeout(()=>toast.classList.remove("show"),3200);
+}
+</script>
+
+</body>
+</html>
